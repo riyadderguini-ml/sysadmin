@@ -1,0 +1,21 @@
+( Notes et remarques sur la commande ls avec les option -ilah) :
+
+-pour commencer les option -i veut dire affiche les num des iniode de chaque trucs, et l'op -l pour lui dire l'utiliser un long listing format en gros en lui demade plus de details, et l'op -a c'est pour lui dire affiche all tout everything meme les fichier cachers, et enfin l'op -h pour lui demander d'aficher les chose ne human readable format.
+
+-la colenne1 fait reference au numeros d'ionode, la colnne2 au permission de accorder de chaque fichier :
+
+( sur les permission ) : 
+
+drwxrwxrwx : ici par exemple ca represente les permision d'un repertoire je sais que c'est un repertoire car ca commence par un d et si c'est a la place du d un - alors ca aurait etais un fichier regulier, et pour les 3 rwx succefis cest pour dire qui pour le 1er que le user proprio du fichier a le doit de read et de write et de executer le fichier sinon dans le cas contraire pour lune des trois possibiliter acorder serais --- i.e rien ne lui est autoriser et le les trois suivant c pour le groupe du proprio et le dernier set de 3 et pour le reste de la populasse, et pour ce qui est de comment modifer les autorisation d'un fichier c comme ca : 
+
+u : pour user
+g : pour groupe 
+o : pour others 
+a : pour all
+
++ : pour ajouter une permission 
+- : pour lenlever
+
+exemple : $chmod u+rw fichier en gros a ajouter l'autorisation au user de read de write.
+
+lets get back a la colonne3 elle fais reference au nomre d'appartion du fichier dans ce repertoire ou il est en gros le nombre de liens vers ce dernier, et la colonne4 c pour le user la cln5 pour le groupe et la cln6 la taille du fichier et la cln7 la date et lheure de la derniere modif du fichier enfin la derniere coln c le nom du fichier.

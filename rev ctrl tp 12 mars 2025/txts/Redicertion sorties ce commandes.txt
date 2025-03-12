@@ -1,0 +1,9 @@
+( Redirections de sorties de commandes ) : 
+
+( Explication de la commande de redirection de sortie > ) : 
+
+-la commande > est une commande de redirection de sortie avec ecrasement elle redirige la sortie dun programme dans un fichier en ecrasent son contenu existant.
+
+( Explication de la commande de redirection de sortie >> ) :
+
+-par contre cette commande elle redirige la sortie dun programme vers un autre fichier mais avec ajout a la fin du fichier sans ecraser le contenue du fichier deja present dans le fichiers.

@@ -1,0 +1,60 @@
+( symlinks, déréferencement ) :
+
+-quel est le type des symlink ? ce sont des fichiers de type l.
+-esque un fichiers de type syslink a les meme caracteristique mise apart le type lorsquil est lister par la commande $ls ? oui.
+-quel est le contenu dun symlink au sens du filesystem ? cest un chemin relatifs ou absolut vers un truc.
+-quesqui difirencie un fichier normal  d'un symlink ? c la facon dont son contenu est interpreter.
+-quelle l'op qui consiste a appliquer une commande au fichier qui est nomme (nomme veut dire montionner ici) par le chemin du symlink ? ont appelle ca dereferencement.
+-comment cree symlink ? avec la commande si desout :
+
+$ ln -s <chemin vers la target> <le nom du symlink>
+
+-comment acceder au content dun symlink ? avec la commande ci dessous :
+
+$ readlink <nom du symlink>
+
+-REMARQUE:
+*UN SYMLINK PEUT POINTER VERS UN REPERTOIRE PAS QUE DES FICHIERS.
+*IL PEUT AUSSI POITER VERS UN AUTRE SYMLINK, DONT CE CAS LE REREFERENCEMONT EST RECURSIF.
+
+( Le déréférencement n'est pas systématique ) :
+
+*les commandes pour obtenir de l'information sur les liens symboliques ne déréférencent pas. Par exemple, la commande stat qui affiche les attributs d'inode d'un fichier s'appliquent sur le lien symbolique.
+
+*Si on désire supprimer un lien symbolique, heureusement que la commande rm ne supprimera pas le fichier pointé par le chemin du lien, mais bien le lien lui-même.
+
+( Forcer à ne pas déréférencer ) :
+
+*Il peut arriver qu'on veuille appliquer une commande au lien symbolique lui-même plutôt qu'au fichier pointé par le chemin de son contenu.
+
+Pour cela, certaines commandes ont une option --no-dereference pour signifier que la commande doit agit sur le lien symbolique plutôt que sur le fichier pointé par son contenu.
+
+( Liens cassés ) :
+
+*Remarque importante : il n'est pas nécessaire qu'un fichier nommé par le chemin d'un lien symbolique existe pour créer le lien symbolique :
+
+On peut tout à fait exécuter la commande :
+
+$ ln -s ./aze qsd
+Cela va créer le lien symbolique nommé qsd, bien qu'aucun fichier n'est nommé aze par le répertoire courant.
+
+$ cat qsd
+cat: qsd: Aucun fichier ou dossier de ce type
+$ ls -l
+total 8
+lrwxrwxrwx 1 alice alice 17 Mar  3 14:02 aptreconf -> /tmp/test/aptconf
+lrwxrwxrwx 1 alice alice  6 Mar  3 14:09 baba -> ./plop
+lrwxrwxrwx 1 bob   alice  6 Mar  3 14:01 bibi -> ./plop
+-rw-r--r-- 1 alice alice  8 Mar  3 14:09 bobo
+-rw-r--r-- 1 root  alice  8 Mar  3 14:01 plop
+lrwxrwxrwx 1 alice alice  5 Mar  3 14:11 qsd -> ./aze
+drwxr-xr-x 3 alice alice 80 Mar  3 14:02 rep
+On appelle cela un « lien cassé » (en: broken link) ou « lien mort » (en: dead link, deadlink).
+
+Bien sur, si on crée un fichier nommé aze dans le répertoire courant, le lien symbolique jouera son rôle :
+
+$ echo hop > aze
+$ cat qsd
+hop
+
+

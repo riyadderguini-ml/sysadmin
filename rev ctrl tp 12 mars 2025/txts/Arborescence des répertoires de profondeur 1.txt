@@ -1,0 +1,3 @@
+( Arborescence de base ) :
+
+-comment voir les repertoire de larboresence de base et leurs description compete ? avec la commande ($man 7 hier) le hier stands for short for hierarchy.

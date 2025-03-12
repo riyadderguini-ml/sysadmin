@@ -1,0 +1,75 @@
+( Montage ) :
+
+-a quoi ressemble l'arborescence du systeme ? c un assemblage d'arborescences de systemes de fichiers montes les uns sur les autres, voila une explication plus en details :
+
+a la base il ny a que le repartoire racine /. Et les systemes de fichiers(en gros moi je limagine un peut comme une clef usb) se mount sur des repertoire existant, et ofrent a leurs tour des repetoires, sur lesquels on peut montrer de nouveaux filesystems de facons recursive.
+
+-comment chercher un filesystem mounted ? avec la commande si dessous :
+
+$ findmnt
+
+-comment mount un filesystem ? avec la commande si dessous :
+
+$ mount
+
+-comment unmount un filesystem ? avec la commande si dessous :
+
+$ unmount
+
+-a quoi sert le ficher /etc/fstab ? Il définit comment et où les systèmes de fichiers (partitions, disques, etc.) doivent être mounted au démarrage du system.
+
+-est il possible de demonter un filesystem en cours d'execution ? non pour pas coicee.
+
+-quelle est la commande qui liste les fichier over ? c :
+
+$ lsos
+
+-quelle est la commande qui identifies les processu en utilisent les fichier ou les sockets ? c :
+
+$ fuser
+
+( Système de fichiers sur périphériques en mode bloc ) :
+
+-quel est la commende qui sert a cree un filesystem qui s'installe dans le peripherique en mode bloc ? cest la commande :
+
+$ mkfs
+
+-quelle est la commande qui permet de checker et de reparer un filesytem en mode bloc ? cest la commande : 
+
+$ fsck
+
+( Inode ) : 
+
+*chaque fichier a son propre inode.
+
+-que contient l'inode d'un fichier ? les metadonner dun fichier (son type, son user, ses permissions, ect...)
+
+-quel est lidentifiant unique d'un fichier ? c son num d'inode.
+
+-les fichiers ont-ils un nom ou pas ? non les fichiers n'ont pas de nom, c'est le repertoires qui donnent des noms au fichiers, et du coup un fichiers peut etre nommer plusieurs fois dans l'arboressence d'un repertoire.
+
+-comment est interpreter le contenu d'un ficher ? linterpretation depent du type de fichiers.
+
+-quel est la cvommande pour voir les infos contenus dans un inode ? cest la cmnd :
+
+$ stat
+
+Attributs stockés dans un inode (penser à ls -l).
+
+( Interprétation du contenu d’un fichier selon son type ) :
+
+Fichier régulier (fichier de type -)
+▶ son contenu est le contenu du fichier (pas d’autre information)
+Répertoire (fichier de type d) :
+▶ son contenu est une liste de paires (nom de fichier, inode
+correspondant). Une telle paire est appelé lien (en: link) ou lien
+physique (en: hardlink)
+▶ En particulier, le nom de fichier est une info du répertoire, et n’est
+pas contenu dans l’inode du fichier.
+▶ Les fichiers n’ont pas de nom, ce sont les répertoires qui leur donnent
+un (ou plusieurs) nom(s).
+▶ Un même fichier (identifié par son inode) peut apparaître dans
+plusieurs répertoires et sous plusieurs noms.
+Lien symbolique (fichier de type l)
+▶ son contenu est le chemin vers lequel il pointe
+

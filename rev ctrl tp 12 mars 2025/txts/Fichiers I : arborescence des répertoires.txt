@@ -1,0 +1,95 @@
+REVISION CTRL TP : 12 mars 2025
+
+(Arborescence de repertoire):
+
+-comment sont organiser les fichiers? dans une arborescence de repertoires.
+
+(Filessystem Hierarchy Standard):
+
+-que fais la FHS (i.e Filessystem Hierarchy Standard)? elle definit le nom et le contenu des principaux repertoires.
+-comment afficher les repertoires et les fichier principaux? avec la commande ($ man 7 hier) ,le hier (i.e hierarchy).
+
+(Notations et raccourcis):
+
+(Notations):
+
+-que designe </> ? le repertoire racine.
+-que designe <.> ? le repertoire courant.
+-que designe <..> ? le repertoire parent du repertoire courant.
+
+(Notations dependant du shell courant) :
+
+-que designe <~> ? le repertoire maison du shell courant, souvant /home/<username>.
+-par quel variable d'environnement le repertoire maison du shell courant est controler ? HOME.
+-ou est definit la variable d'environement qui controle le repertoire maison du shell courant ? dans /etc/passwd
+-que designe <-> ? le repertoire recedement visiter.
+
+(Chemin absolu, chemin relatif) :
+
+-quesque un chemin absolu ? c'est un chemin complet qui part de la racine du systeme de fichiers (i.e </>) jusqu'au fichier ou repertoire cible, il est caracteriser par le fait qu'il est independant de l'emplacement actuel dans le systeme de fichiers.
+-quel est lutilisation d'un chemin absolut ? utile pour acceder a un repertoire ou un fichier depuis n'importe le quel endroit.
+-quesque un chemin relatif ? c'est un chemin vers un fichier ou repertoire cible et qui commence par le repertoire courant, i.e il ne commence pas par </>.
+-quel est l'une des caracteristiques des chemin relatifs ? ils peuvent inclures deds caracteres specieax comme < . > qui designe le repertoire courant ou enore < .. > qui designe le repertoire parrent.
+
+(Fichiers caches) :
+
+-quel etait lobjectifs principales des fichiers cacher sous linux ? cetait de cacher les repertoires < . > et < .. > qui sont toujours presents dans tous les repertoires.
+-quel est loption de la commande < ls > qui permet de voir les fichiers cachers ? c'est loption < -a > (i.e $ -a).
+
+(Presque tout est fichiers) :
+
+-quesque les fichiers ? ce sont une sorte d'interface.
+-a quoi servent les fichiers ? ils permettent de modiliser de facon uniforme le ait de lire, decrire et de dire qui a le droit daccer a une ressource ..... ect.
+
+( Types de fichiers ) :
+
+> - : fichiers regulirs.
+> d : directiries.
+> l : symbolique links.
+> p : pipe.
+> s : sockets.
+> b : block device.
+> c : character device.
+
+( Fichiers reguliers ) :
+
+-quelle est la caracteristique des fichiers regulier ? ils ne sont pas types.
+-quelle est la consequance du fait que les fichies reguliers ne soit pas typers sur le filesystem ? le filesystem na nulle part ou indiquer l'utilisation prevue d'un fichier ou son format.
+-comment les qpplication font pour reconnaitre le type d'un fichiers regulier ? certaine utilise l'extention presente dans le nom de fichier (i.e <nom fich>.<extension>) et d'autre dautre explore le debut du fichier pour deviner son type (i.e sont utilisation possible) avec son "magic number" (explication/hypothese : je pense que c'est un numbre qui est present au debut de lyncripting du fichier qui est en bijection avec un ensemble de type de fichier connu).
+-quelle est la commande qui permet de connaitre le type d'un fichier ? la commande ($ file, see $ man file).
+-quelle est la caracterisques des fichiers text par rapport a leurs encodage ? ils ne specifient pas leurs encodage, donc c'est a l'humain qui l'utilise de determiner son encodage comme il peut.
+-comment changer l'encodage d'un fichier text ? avec la commende ($ iconv [options] [-f from-encoding] [-t to-encoding] [inputfile]).
+
+( Liens symboliques ) :
+
+-comment penser au lien symbolique ? c'est comme les raccourcis sous windows.
+-quesque un lien symbolique ? c'est un fichier particulier qui contien une refernece a un chemain absolut ou relatifs.
+-que ce passe'il quand l'os accede au fichiers de type symlink ? alors ici en parle de "d'ereferencement" il accede alors au fichier ou repertoire representer par le chemin.
+-quand-es-ce-que l'on parle de "broken link" ? loerceque l'os accede au fichier poiter par le symlink via le chemin poiter par ce dernier et qu'il s'appersoit que le fichier n'existe pas.
+-comment proceder si l'on veut appliquer des truc au symlink lui meme via une X commande et pas a ca reference ? on utilise alors la l'option (--no--dereferece) cette derniere est utiliser comme un "interpreteur" pour qctiver et desactiver des configurations.
+
+( Tubes nommes et sockets ) : 
+
+-a quoi servent les tubes nommes et les sockets ? permettent au processus de communiquer entre eux.
+-quelle est celui qui leurs permets de communiquer dans les deux sens ? c'est les sockts.
+-et pour communiquer dans un seul sens ? avec les tubes.
+-ou se trouve les sockts et tubes en generale ? dans /run.
+-les pereferique sont gerer par qui ? par "udev" monter dans un systeme de fichier special monter dans /dev.
+-ou es-ce-que l'on peut parfois trouver les sockets et tubes ? dans /tmp ou voir meme dans la variable d'environement HOME, de l'user qui lance le programme.
+
+( Peripheriques  ) :
+
+-ou sont les fichiers qui permette d'interagir avec les peripheriques ? dans /dev.
+-quelle sont les periferiques qui n'ont exeptionnelement pas de fichiers pour qui leurs corresponds dans /dev ? les periferiques reseaux.
+-que ce passe il au niveau de la colonne correspondant a la taille du fichier quand on execute la commande ($ ls -l ~/dev) ? elle est replacer par deux nombres le majeur indique quel pilote utilise le noyeau pour manipuler le periferique, et le mineur indique le peripherique, par rapport aux autres du meme majeur.
+
+
+( Peripheriques en mode caractere ) :
+
+-quesqu'un "peripherique en mode caractere" ou en anglais "caractere device" ? c'est un peripherique auquel en accede octet par octet.
+-quesque un fichier de type "caractere device" ? d'apres ce que j'ai compris en unix tout est fichier donc les peripherique sous unix sont vu comme des fichier et ya des peripheriques qui sont en mode caractere device c-a-d qu'il sont accede octer par octer, et donc les fichier on mode caracter divice sont en realiter une interface enfin pas en realiter, ils sont plutot utiliser comme une interface pour manipuler les peripherique qui sont en mode caracte divice en gros ils sont utiliser pour recevoire ou emmettre des flux de donnes au periferiqes comme la souris le caliver,... et aussi la memoie vivre car elle est aussi considerer comme un periferique.
+-quelle sont les certain fichier speciaux mais bien utile qui sont de type caratere divice qui sont bien utile comme le fichier /dev/zero qui contien que des octets de zero succesifs ? il yas /dev/(null ou full ou random ou unrandom) il sont accessible a la section 4 de man pour plus d'infos avec la commande ($man 4 [tab] [tab]).
+
+( Peripheriques en mode bloc ) : 
+
+-a quoi correspondent les periferiques en mode bloc ? ils correspendent au peripherique de stockage et a leur drivers et sont traites specifiquement.

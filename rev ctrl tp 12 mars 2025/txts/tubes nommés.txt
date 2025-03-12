@@ -1,0 +1,15 @@
+( tubes nommés ) :
+
+-quesque un tube nomme sous unix ? cest un mecanisme de communication iterproccessus qui permet au processus de communiquer entre eux en echangent des donnes via un fichier special appeler FIFO.
+-comment cree un tubes nomme ? avec la commende ($mkfifo mon_tube).
+-comment lutiliser ? voici un exemple : 
+
+$echo "bonjour" > mon_tube
+
+la commende si dessus elle ecrit dans un tube nome comme un fichier normal.
+
+$cat < mon_tube
+
+et la commande si dessus et un autre proccessus qui lit des donner du tube.
+
+donc il vien dy avoir une communication inter processus.

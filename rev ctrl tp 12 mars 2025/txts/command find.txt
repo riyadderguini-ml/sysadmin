@@ -1,0 +1,137 @@
+Voici le contenu du cours sur la commande `find` sous Unix/Linux, résumé et formaté en texte brut. Tu peux copier-coller ce contenu dans un fichier texte (par exemple, `cours_find.txt`) pour l'avoir sous forme de fichier.
+
+---
+
+```
+Cours sur la commande `find` sous Unix/Linux
+
+1. Introduction à `find`
+--------------------------------
+- `find` est une commande Unix/Linux utilisée pour rechercher des fichiers et des répertoires selon des critères spécifiques.
+- Elle permet de :
+  - Rechercher des fichiers par nom, taille, date de modification, etc.
+  - Exécuter des actions sur les fichiers trouvés (comme les supprimer, les déplacer, etc.).
+
+2. Syntaxe de base
+--------------------------------
+La syntaxe générale de `find` est :
+```
+find [répertoire] [critères] [actions]
+```
+- `répertoire` : Le répertoire de départ pour la recherche (par défaut, le répertoire courant `.`).
+- `critères` : Les conditions que les fichiers doivent satisfaire (par exemple, nom, taille, etc.).
+- `actions` : Les opérations à effectuer sur les fichiers trouvés (par défaut, afficher les résultats).
+
+3. Critères de recherche
+--------------------------------
+a. Recherche par nom
+- `-name` : Recherche des fichiers par nom (sensible à la casse).
+  ```
+  find /chemin -name "fichier.txt"
+  ```
+- `-iname` : Recherche par nom, insensible à la casse.
+  ```
+  find /chemin -iname "fichier.txt"
+  ```
+
+b. Recherche par type
+- `-type` : Recherche des fichiers par type.
+  - `f` : fichier régulier.
+  - `d` : répertoire.
+  - `l` : lien symbolique.
+  ```
+  find /chemin -type f  # Recherche uniquement des fichiers
+  ```
+
+c. Recherche par taille
+- `-size` : Recherche des fichiers par taille.
+  - `+n` : fichiers plus grands que `n`.
+  - `-n` : fichiers plus petits que `n`.
+  - `n` : fichiers de taille exacte `n`.
+  ```
+  find /chemin -size +1M  # Fichiers de plus de 1 Mo
+  ```
+
+d. Recherche par date
+- `-mtime` : Recherche des fichiers modifiés il y a `n` jours.
+  - `+n` : modifiés il y a plus de `n` jours.
+  - `-n` : modifiés il y a moins de `n` jours.
+  ```
+  find /chemin -mtime -7  # Fichiers modifiés il y a moins de 7 jours
+  ```
+
+e. Recherche par permissions
+- `-perm` : Recherche des fichiers avec des permissions spécifiques.
+  ```
+  find /chemin -perm 644  # Fichiers avec les permissions 644
+  ```
+
+4. Actions sur les fichiers trouvés
+--------------------------------
+a. Afficher les résultats
+- Par défaut, `find` affiche les résultats sur la sortie standard.
+  ```
+  find /chemin -name "*.txt"
+  ```
+
+b. Exécuter une commande sur chaque fichier
+- `-exec` : Exécute une commande sur chaque fichier trouvé.
+  ```
+  find /chemin -name "*.txt" -exec rm {} \;
+  ```
+  Ici, `{}` est un placeholder pour le fichier trouvé, et `\;` indique la fin de la commande.
+
+c. Supprimer des fichiers
+- `-delete` : Supprime les fichiers trouvés.
+  ```
+  find /chemin -name "*.tmp" -delete
+  ```
+
+5. Combinaison de critères
+--------------------------------
+a. ET logique (`-a`)
+- Par défaut, les critères sont combinés avec un ET logique.
+  ```
+  find /chemin -name "*.txt" -type f
+  ```
+
+b. OU logique (`-o`)
+- Utilisez `-o` pour un OU logique.
+  ```
+  find /chemin -name "*.txt" -o -name "*.log"
+  ```
+
+c. Négation (`!`)
+- Utilisez `!` pour exclure des critères.
+  ```
+  find /chemin ! -name "*.tmp"
+  ```
+
+6. Exemples pratiques
+--------------------------------
+- Rechercher tous les fichiers `.log` modifiés il y a moins de 7 jours :
+  ```
+  find /var/log -name "*.log" -mtime -7
+  ```
+- Supprimer tous les fichiers temporaires `.tmp` :
+  ```
+  find /chemin -name "*.tmp" -delete
+  ```
+
+7. Bonnes pratiques
+--------------------------------
+- Toujours tester la commande `find` sans action (comme `-delete`) pour vérifier les résultats.
+- Utiliser `-exec` avec prudence, car il peut modifier ou supprimer des fichiers de manière irréversible.
+
+---
+Conclusion
+--------------------------------
+`find` est un outil indispensable pour tout utilisateur Unix/Linux. Ce cours couvre :
+- La syntaxe de base.
+- Les critères de recherche courants.
+- Les actions possibles sur les fichiers trouvés.
+- Des exemples pratiques pour illustrer son utilisation.
+```
+
+---
+Tu peux enregistrer ce texte dans un fichier texte (par exemple, `cours_find.txt`) pour l'avoir sous forme de fichier. Si tu as besoin d'autres explications ou d'une version dans un autre format, n'hésite pas à demander ! 🚀
